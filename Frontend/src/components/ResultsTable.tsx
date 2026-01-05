@@ -48,10 +48,10 @@
 //                   const num = Number(val);
 //                   return isNaN(num) ? "N/A" : num.toFixed(decimals);
 //                 };
-                
+
 //                 return (
-//                   <TableRow 
-//                     key={index} 
+//                   <TableRow
+//                     key={index}
 //                     className={`${index % 2 === 0 ? "table-row-even" : "table-row-odd"} hover:bg-accent/30 transition-colors`}
 //                   >
 //                     <TableCell className="font-semibold text-foreground">{result.model || "N/A"}</TableCell>
@@ -90,14 +90,8 @@
 
 // export default ResultsTable;
 
-
 import { SelectionResult } from "@/types/selection";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -174,64 +168,61 @@ const ResultsTable = ({ results }: ResultsTableProps) => {
 
             <TableBody>
               {results.map((r, i) => (
-                <TableRow
-                  key={i}
-                  className={i % 2 === 0 ? "bg-muted/20" : ""}
-                >
-                  <TableCell className="font-semibold">
-                    {r.model}
-                  </TableCell>
+                <TableRow key={i} className={i % 2 === 0 ? "bg-muted/20" : ""}>
+                  {/* Model */}
+                  <TableCell className="font-semibold">{r.model}</TableCell>
 
-                  <TableCell className="text-center">
-                    {r.type}
-                  </TableCell>
+                  {/* Model Type */}
+                  <TableCell className="text-center">{r.modelType}</TableCell>
 
-                  <TableCell className="text-center">
-                    {r.motor}
-                  </TableCell>
+                  {/* Motor Type */}
+                  <TableCell className="text-center">{r.motorType}</TableCell>
 
-                  <TableCell className="text-center">
-                    {dec(r.mca, 2)}
-                  </TableCell>
+                  {/* MCA */}
+                  <TableCell className="text-center">{dec(r.mca, 2)}</TableCell>
 
+                  {/* MOCP */}
                   <TableCell className="text-center">
                     {dec(r.mocp, 2)}
                   </TableCell>
 
+                  {/* Static Pressure (Pa) */}
+                  <TableCell className="text-center">{dec(r.pa, 2)}</TableCell>
+
+                  {/* Static Pressure (IN W.G.) */}
                   <TableCell className="text-center">
-                    {dec(r.staticPressurePa, 2)}
+                    {dec(r.inwg, 3)}
                   </TableCell>
 
-                  <TableCell className="text-center">
-                    {dec(r.staticPressureInWG, 3)}
-                  </TableCell>
+                  {/* Net Supply (CFM) */}
+                  <TableCell className="text-center">{int(r.cfm)}</TableCell>
 
-                  <TableCell className="text-center">
-                    {int(r.netCFM)}
-                  </TableCell>
+                  {/* Watts */}
+                  <TableCell className="text-center">{int(r.watts)}</TableCell>
 
-                  <TableCell className="text-center">
-                    {int(r.watts)}
-                  </TableCell>
+                  {/* SRE */}
+                  <TableCell className="text-center">{int(r.sre)}</TableCell>
 
-                  <TableCell className="text-center">
-                    {int(r.sre)}
-                  </TableCell>
-
+                  {/* Net Moisture Transfer */}
                   <TableCell className="text-center">
                     {int(r.moistureTransfer)}
                   </TableCell>
 
+                  {/* Product Link */}
                   <TableCell className="text-center">
-                    <a
-                      href={`https://reversomatic.com/products/${r.model}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-secondary"
-                    >
-                      {r.model}
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
+                    {r.productLink ? (
+                      <a
+                        href={r.productLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-primary hover:underline"
+                      >
+                        {r.productText || r.model}
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    ) : (
+                      "-"
+                    )}
                   </TableCell>
                 </TableRow>
               ))}
@@ -244,4 +235,3 @@ const ResultsTable = ({ results }: ResultsTableProps) => {
 };
 
 export default ResultsTable;
-

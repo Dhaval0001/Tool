@@ -27,21 +27,25 @@ export interface SelectionFormData {
 
 export interface SelectionResult {
   model: string;
-  type: string;
-  motor: string;
+  modelType: string;
+  motorType: string;
 
-  mca: number;
-  mocp: number;
+  mca: number | string;
+  mocp: number | string;
 
-  staticPressurePa: number;
-  staticPressureInWG: number;
+  pa: number | string;
+  inwg: number | string;
 
-  netCFM: number;
-  watts: number;
+  cfm: number | string;
+  watts: number | string;
 
-  sre: number;
-  moistureTransfer: number;
+  sre: number | string;
+  moistureTransfer: number | string;
+
+  productLink?: string;
+  productText?: string;
 }
+
 
 
 export interface ApiResponse {

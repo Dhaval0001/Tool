@@ -327,12 +327,14 @@ def get_best_result_per_unit_from_excel(
     "Sensible Recovery Efficiency @ 0°C (SRE %)": int(round(sreVal, 0)),
     "Net Moisture Transfer @ 0°C %": int(round(moistVal, 0)),
 
-    "Product Details and Files": linkText,
-    "Product Details and Files URL": linkAddress,
+   "productLink": linkAddress,
+
+        # optional: keep the display text if you want
+        "productText": linkText,
             }
         )
 
-    return {"results": results, "skippedUnits": skippedUnits, "totalUnits": unitCount}
+    return {"success": True, "results": results, "skippedUnits": skippedUnits, "totalUnits": unitCount}
 
 
 if __name__ == "__main__":

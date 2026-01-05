@@ -175,47 +175,61 @@ class SelectionRow(BaseModel):
     productLink: str
 
 
+
+
 @app.post("/api/run")
 def run_selection(req: SelectionRequest):
     try:
         result = get_best_result_per_unit_from_excel(
-            excel_path=EXCEL_PATH,
-            airUnit=req.airUnit,
-            airflow=req.airflow,
-            spUnit=req.spUnit,
-            pressure=req.pressure,
-            modelType=req.modelType,
-            motorType=req.motorType,
-            sreInput=req.sreInput,
-            moistInput=req.moistureInput,
-        )
+    excel_path=EXCEL_PATH,
+    airUnit=req.airUnit,
+    airflow=req.airflow,
+    spUnit=req.spUnit,
+    pressure=req.pressure,
+    modelType=req.modelType,
+    motorType=req.motorType,
+    sreInput=req.sreInput,
+    moistInput=req.moistureInput,
+)
 
         if not result or "error" in result:
             return {
                 "success": False,
                 "error": result.get("error", "Unknown selection error")
             }
+        
+
 
         # Normalize Excel output → frontend-friendly keys
         normalized = []
         for r in result.get("results", []):
             normalized.append({
-                "model": r["Model"],
-        "type": r["Model Type"],
-        "motor": r["Motor Type"],
+    "model": r.get("Model"),
+    "modelType": r.get("Model Type"),
+    "motorType": r.get("Motor Type"),
 
-        "mca": float(r["MCA"]),
-        "mocp": float(r["MOCP"]),
+    "mca": r.get("MCA"),
+    "mocp": r.get("MOCP"),
 
-        "staticPressurePa": float(r["Static Pressure (Pa)"]),
-        "staticPressureInWG": float(r["Static Pressure (IN W.G.)"]),
+    # ✅ Static Pressure
+    "pa": r.get("Static Pressure (Pa)"),
+    "inwg": r.get("Static Pressure (IN W.G.)"),
 
-        "netCFM": float(r["Net Supply (CFM)"]),
-        "watts": float(r["Watts"]),
+    # ✅ Airflow
+    "cfm": r.get("Net Supply (CFM)"),
 
-        "sre": float(r["Sensible Recovery Efficiency @ 0°C (SRE %)"]),
-        "moistureTransfer": float(r["Net Moisture Transfer @ 0°C %"]),
-            })
+    # ✅ Power
+    "watts": r.get("Watts"),
+
+    # ✅ Performance
+    "sre": r.get("Sensible Recovery Efficiency @ 0°C (SRE %)"),
+    "moistureTransfer": r.get("Net Moisture Transfer @ 0°C %"),
+
+    # ✅ Product link
+    "productLink": r.get("productLink"),
+    "productText": r.get("productText"),
+})
+
 
         return {
             "success": True,
