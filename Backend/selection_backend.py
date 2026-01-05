@@ -1,5 +1,16 @@
 from openpyxl import load_workbook
 
+_WB = None
+_WS_DATA = None
+
+def _load_excel_once(excel_path: str):
+    global _WB, _WS_DATA
+
+    if _WB is None:
+        _WB = load_workbook(excel_path, data_only=True)
+        _WS_DATA = _WB["Data"]
+
+
 def get_best_result_per_unit_from_excel(
     excel_path: str,
     airUnit: str,
@@ -11,8 +22,13 @@ def get_best_result_per_unit_from_excel(
     sreInput: float,
     moistInput: float,
 ):
-    wb = load_workbook(excel_path, data_only=True)
-    ws_data = wb["Data"]
+    
+    
+    # wb = load_workbook(excel_path, data_only=True)
+    # ws_data = wb["Data"]
+
+    _load_excel_once(excel_path)
+    ws_data = _WS_DATA
 
     # basic validation (same as VBA)
     if not (modelType and motorType and airUnit and spUnit):

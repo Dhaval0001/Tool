@@ -128,7 +128,7 @@ const ResultsTable = ({ results }: ResultsTableProps) => {
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
-              <TableRow className="bg-primary">
+              <TableRow className="bg-primary hover:bg-primary">
                 <TableHead className="text-primary-foreground">Model</TableHead>
                 <TableHead className="text-primary-foreground text-center">
                   Model Type

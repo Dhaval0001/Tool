@@ -211,7 +211,7 @@ const SelectionForm = ({ onSubmit, isLoading }: SelectionFormProps) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="sreInput" className="label-text">
-                SRE Input
+                SRE %
               </Label>
               <Input
                 id="sreInput"
@@ -226,7 +226,7 @@ const SelectionForm = ({ onSubmit, isLoading }: SelectionFormProps) => {
 
             <div className="space-y-2">
               <Label htmlFor="moistureTransferInput" className="label-text">
-                Moisture Transfer Input
+                Moisture Transfer %
               </Label>
               <Input
                 id="moistureTransferInput"

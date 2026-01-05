@@ -41,10 +41,10 @@ const Index: React.FC = () => {
       <main className="container mx-auto px-4 py-8">
         {/* Hero Section */}
         <div className="text-center mb-8 animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/10 rounded-full mb-4">
+          {/* <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/10 rounded-full mb-4">
             <Wind className="w-4 h-4 text-secondary" />
             <span className="text-sm font-medium text-secondary">Professional Selection Tool</span>
-          </div>
+          </div> */}
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
             HRV/ERV Model Selection
           </h2>
@@ -91,7 +91,7 @@ const Index: React.FC = () => {
       <footer className="bg-primary mt-auto py-6">
         <div className="container mx-auto px-4 text-center">
           <p className="text-primary-foreground/70 text-sm">
-            © {new Date().getFullYear()} Reversomatic. Industrial Ventilation Solutions.
+            © {new Date().getFullYear()} Reversomatic Manufacturing Ltd.
           </p>
         </div>
       </footer>
