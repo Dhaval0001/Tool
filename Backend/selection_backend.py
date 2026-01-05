@@ -311,19 +311,24 @@ def get_best_result_per_unit_from_excel(
         results.append(
             {
                 "Model": model,
-                "Model Type": model_type_val,
-                "Motor Type": motor_type_val,
-                "MCA": mca,
-                "MOCP": mocp,
-                "Static Pressure (Pa)": pa_out,
-                "Static Pressure (IN W.G.)": inwg_out,
-                "Net Supply (L/S)": ls_out,
-                "Net Supply (CFM)": cfm_out,
-                "Watts": watts,
-                "Sensible Recovery Efficiency @ 0°C (SRE %)": sreVal,
-                "Net Moisture Transfer @ 0°C %": moistVal,
-                "Product Details and Files Text": linkText,
-                "Product Details and Files URL": linkAddress,
+    "Model Type": model_type_val,
+    "Motor Type": motor_type_val,
+    "MCA": round(float(mca or 0), 2),
+    "MOCP": round(float(mocp or 0), 2),
+
+    "Static Pressure (Pa)": round(pa, 2),
+    "Static Pressure (IN W.G.)": round(inwg, 3),
+
+    "Net Supply (L/S)": round(ls, 3),
+    "Net Supply (CFM)": int(round(cfm, 0)),
+
+    "Watts": int(round(watts, 0)),
+
+    "Sensible Recovery Efficiency @ 0°C (SRE %)": int(round(sreVal, 0)),
+    "Net Moisture Transfer @ 0°C %": int(round(moistVal, 0)),
+
+    "Product Details and Files": linkText,
+    "Product Details and Files URL": linkAddress,
             }
         )
 

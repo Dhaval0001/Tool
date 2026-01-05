@@ -9,21 +9,40 @@ export interface SelectionFormData {
   moistureTransferInput: number;
 }
 
+// export interface SelectionResult {
+//   model: string;
+//   type: string;
+//   motor: string;
+//   mca: number;
+//   mocp: number;
+//   staticPressure: number;
+//   pressureRatio: number;
+//   netAirflow: number;
+//   sre: number;
+//   sreActual: number;
+//   moistureTransfer: number;
+//   moistureTransferActual: number;
+//   productLink: string;
+// }
+
 export interface SelectionResult {
   model: string;
   type: string;
   motor: string;
+
   mca: number;
   mocp: number;
-  staticPressure: number;
-  pressureRatio: number;
-  netAirflow: number;
+
+  staticPressurePa: number;
+  staticPressureInWG: number;
+
+  netCFM: number;
+  watts: number;
+
   sre: number;
-  sreActual: number;
   moistureTransfer: number;
-  moistureTransferActual: number;
-  productLink: string;
 }
+
 
 export interface ApiResponse {
   success: boolean;
