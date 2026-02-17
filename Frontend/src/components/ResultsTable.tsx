@@ -149,6 +149,9 @@ const ResultsTable = ({ results }: ResultsTableProps) => {
                   Static Pressure (in. W.G.)
                 </TableHead>
                 <TableHead className="text-primary-foreground text-center">
+                  Net Supply (L/S)
+                </TableHead>
+                <TableHead className="text-primary-foreground text-center">
                   Net Supply (CFM)
                 </TableHead>
                 <TableHead className="text-primary-foreground text-center">
@@ -193,6 +196,8 @@ const ResultsTable = ({ results }: ResultsTableProps) => {
                   <TableCell className="text-center">
                     {dec(r.inwg, 3)}
                   </TableCell>
+                  {/* Net Supply (L/S) */}
+                  <TableCell className="text-center">{dec(r.ls, 3)}</TableCell> 
 
                   {/* Net Supply (CFM) */}
                   <TableCell className="text-center">{int(r.cfm)}</TableCell>

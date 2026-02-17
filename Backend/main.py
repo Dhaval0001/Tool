@@ -122,6 +122,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
 from selection_backend import get_best_result_per_unit_from_excel
+import json
 
 # ---------- EXCEL PATH ----------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -141,6 +142,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:8080",
         "http://127.0.0.1:8080",
+        "http://3.148.169.252",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -217,6 +219,7 @@ def run_selection(req: SelectionRequest):
 
     # ✅ Airflow
     "cfm": r.get("Net Supply (CFM)"),
+    "ls": r.get("Net Supply (L/S)"),
 
     # ✅ Power
     "watts": r.get("Watts"),
@@ -229,7 +232,6 @@ def run_selection(req: SelectionRequest):
     "productLink": r.get("productLink"),
     "productText": r.get("productText"),
 })
-
 
         return {
             "success": True,

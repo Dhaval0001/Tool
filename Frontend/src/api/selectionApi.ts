@@ -99,7 +99,8 @@
 
 import { SelectionFormData, ApiResponse, SelectionResult } from "@/types/selection";
 
-const API_URL = "http://127.0.0.1:8000/api/run";
+// Use local backend during development
+const API_URL = "/api/run";
 
 
 export async function runSelection(
@@ -133,9 +134,27 @@ export async function runSelection(
       return { success: false, error: "Invalid backend response" };
     }
 
+    // Map backend results to frontend format
+    const mappedResults: SelectionResult[] = data.results.map((item: any) => ({
+      model: item.Model || item.model || "",
+      modelType: item["Model Type"] || item.modelType || "",
+      motorType: item["Motor Type"] || item.motorType || "",
+      mca: item.MCA ?? item.mca ?? 0,
+      mocp: item.MOCP ?? item.mocp ?? 0,
+      pa: item["Static Pressure (Pa)"] ?? item.pa ?? 0,
+      inwg: item["Static Pressure (IN W.G.)"] ?? item.inwg ?? 0,
+      ls: item["Net Supply (L/S)"] ?? item.ls ?? 0,
+      cfm: item["Net Supply (CFM)"] ?? item.cfm ?? 0,
+      watts: item.Watts ?? item.watts ?? 0,
+      sre: item["Sensible Recovery Efficiency @ 0°C (SRE %)"] ?? item.sre ?? 0,
+      moistureTransfer: item["Net Moisture Transfer @ 0°C %"] ?? item.moistureTransfer ?? 0,
+      productLink: item.productLink ?? item["productLink"] ?? "",
+      productText: item.productText ?? item["productText"] ?? "",
+    }));
+
     return {
       success: true,
-      results: data.results as SelectionResult[],
+      results: mappedResults,
     };
   } catch (err: any) {
     return {

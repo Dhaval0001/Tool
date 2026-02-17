@@ -37,6 +37,7 @@ export interface SelectionResult {
   inwg: number | string;
 
   cfm: number | string;
+  ls: number | string;
   watts: number | string;
 
   sre: number | string;
